@@ -56,7 +56,38 @@
         <div class="invalid-feedback">Category should be valid</div>
     </div>
        
-       
+    <div class="mb-3">
+        <h5>Sustainability Project (Optional)</h5>
+        
+        <label for="projectName" class="form-label">Project Name</label>
+        <input name="listing[sustainabilityProject][name]" type="text" class="form-control" placeholder="e.g., Local Beach Cleanup"/>
+      
+        <label for="projectDescription" class="form-label mt-2">Description</label>
+        <textarea name="listing[sustainabilityProject][description]" class="form-control" rows="3" placeholder="Briefly describe the project..."></textarea>
+      
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input name="listing[sustainabilityProject][startDate]" type="date" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label for="endDate" class="form-label">End Date</label>
+            <input name="listing[sustainabilityProject][endDate]" type="date" class="form-control" />
+          </div>
+        </div>
+      
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label for="startTime" class="form-label">Start Time</label>
+            <input name="listing[sustainabilityProject][startTime]" type="time" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label for="endTime" class="form-label">End Time</label>
+            <input name="listing[sustainabilityProject][endTime]" type="time" class="form-control" />
+          </div>
+        </div>
+      </div>
+      
         <div  class="mb-3">
             <label for="location" class="form-label">Location</label>
             <input name="listing[location]" type="text" placeholder="enter location" class="form-control" required />

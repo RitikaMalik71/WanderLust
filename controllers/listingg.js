@@ -2,6 +2,7 @@
 const Listing =require("../models/listing");
 const mbxgeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken=process.env.MAP_TOKEN;
+const axios = require('axios');
 
 const geocodingClient = mbxgeocoding({ accessToken:mapToken });
 
@@ -26,7 +27,39 @@ module.exports.showListing=async (req,res)=>{
       res.redirect("/listings");
     }
     console.log(listings);
-    res.render("show.ejs",{listings});
+     // 🌤️ Weather & AQI API Integration
+let weather = null;
+let aqi = null;
+const [lng, lat] = listings.geometry.coordinates;
+const apiKey = process.env.OPENWEATHER_API_KEY;
+
+try {
+  // Fetch Weather Data
+  const weatherRes = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {
+    params: {
+      lat: lat,
+      lon: lng,
+      appid: apiKey,
+      units: "metric",
+    },
+  });
+  weather = weatherRes.data;
+
+  // Fetch AQI Data
+  const aqiRes = await axios.get(`https://api.openweathermap.org/data/2.5/air_pollution`, {
+    params: {
+      lat: lat,
+      lon: lng,
+      appid: apiKey,
+    },
+  });
+  aqi = aqiRes.data.list[0];
+
+} catch (e) {
+  console.log("Error fetching weather or AQI:", e.message);
+}
+
+    res.render("show.ejs",{listings,weather,aqi});
     };
 
     module.exports.createListing = async (req, res, next) => {
@@ -138,5 +171,9 @@ module.exports.showListing=async (req,res)=>{
     };
     module.exports.filterMountains=async(req,res)=>{
       const allListings=await   Listing.find({category: "Mountains"});
+      res.render("filter.ejs",{allListings});
+    };
+    module.exports.filterAmazingPools=async(req,res)=>{
+      const allListings=await   Listing.find({category: "Amazing Pools"});
       res.render("filter.ejs",{allListings});
     };

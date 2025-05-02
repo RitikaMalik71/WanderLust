@@ -12,7 +12,16 @@ image :Joi.object({
 }),
 country :Joi.string().required(),
 category :Joi.string().required(),
-    }).required(),
+sustainabilityProject: Joi.object({
+    name: Joi.string().allow('').optional(),
+    description: Joi.string().allow('').optional(),
+    startDate: Joi.date().allow('').optional(),
+    endDate: Joi.date().allow('').optional(),
+    startTime: Joi.string().pattern(/^([0-1]\d|2[0-3]):([0-5]\d)$/).allow('').optional(), 
+    endTime: Joi.string().pattern(/^([0-1]\d|2[0-3]):([0-5]\d)$/).allow('').optional(),
+  }).optional()
+}).required(),
+    
 
 });
 module.exports.reviewSchema=Joi.object({

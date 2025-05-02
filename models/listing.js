@@ -38,6 +38,14 @@ const listingSchema=new Schema({
     enum:["Mountains","Camping","Arctic","Domes","Boat","Farms","Iconic Cities","Rooms","Trending"],
     required :true,
  },
+ sustainabilityProject: {
+    name: String,
+    description: String,
+    startDate: Date,
+    endDate: Date,
+    startTime: String,
+    endTime: String
+},
 
 });
 //momgoose middleware post wala

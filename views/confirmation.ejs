@@ -1,0 +1,19 @@
+<% layout("layout/boilerplate") %>
+
+<div class="container mt-5 mb-5">
+  <h2 style="color:#fe424d ">Booking Confirmed 🎉</h2>
+
+  <div class="card p-4 mt-4 shadow">
+    <h4>Booking Details</h4>
+    <p><strong>Listing:</strong> <%= listing.title %></p>
+    <p><strong>Adults:</strong> <%= booking.adults %></p>
+    <p><strong>Children:</strong> <%= booking.children %></p>
+    <p><strong>Days:</strong> <%= booking.days %></p>
+    <p><strong>Check-In:</strong> <%= booking.checkin.toLocaleDateString("en-IN") %></p>
+    <p><strong>Check-Out:</strong> <%= booking.checkout.toLocaleDateString("en-IN") %></p>
+    
+    <p><strong>Participating in Sustainability Project:</strong> <%= booking.participateInSustainability ? "Yes" : "No" %></p>
+
+    <a href="/listings/<%= listing._id %>" class="btn btn-dark  add-btn">Back to Listing</a>
+  </div>
+</div>

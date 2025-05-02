@@ -21,13 +21,24 @@
      
           &nbsp;
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">WanderLust your home</a>
+          <a class="nav-link" href="/listings/new">WanderLust</a>
           <%if(!currUser){%>
             <a class="nav-link "  href="/signup"><b>Sign Up</b></a>
             <a class="nav-link" href="/login"><b>Login</b></a>
          <% }%>
           <%if(currUser){%>
-            <a class="nav-link" href="/logout"><b>Logout</b></a>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                My Profile
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item text-center" href="/profile">View Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li> <a class="nav-link text-center" href="/logout"><b>Logout</b></a></li>
+              </ul>
+            </li>
          <% }%>
         
          

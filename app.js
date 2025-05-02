@@ -13,6 +13,9 @@ const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate");
 const listingsRouter=require("./routes/listings.js");
 const reviewsRouter=require("./routes/reviews.js");
+const bookingsRouter = require('./routes/bookings');
+
+
 const session=require("express-session");
 const flash=require("connect-flash");
 const passport=require("passport");
@@ -108,8 +111,8 @@ app.use ((req,res,next)=>{
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
 app.use("/",userRouter);
+app.use(bookingsRouter);
 app.use("/search",searchRouter);
-
 
 
 

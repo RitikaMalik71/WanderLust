@@ -1,0 +1,52 @@
+
+<% layout("/layout/boilerplate") %>
+<div class="container mt-5">
+  <h2 class="mb-4 " style="color:#fe424d ">Welcome, <%= currUser.username || currUser.email %></h2>
+
+  <h3 class="mt-4">Upcoming Bookings</h3>
+  <% if (upcomingBookings.length === 0) { %>
+    <p>No upcoming bookings.</p>
+  <% } else { %>
+    <div class="list-group mb-4">
+      <% upcomingBookings.forEach(booking => { %>
+        <div class="list-group-item">
+          <h5><%= booking.listing.title %></h5>
+          <p>
+            Check-in: <%= booking.checkin.toDateString() %><br>
+            Check-out: <%= booking.checkout.toDateString() %><br>
+            Adults: <%= booking.adults %>, Children: <%= booking.children %><br>
+            Sustainability Project: <%= booking.participateInSustainability ? "Yes" : "No" %>
+          </p>
+          <form action="/profile/bookings/<%= booking._id %>/cancel" method="POST" class="d-inline">
+            <button class="btn btn-danger btn-sm">Cancel Booking</button>
+          </form>
+          &nbsp;&nbsp;&nbsp;
+          <a href="/profile/bookings/<%= booking._id %>/receipt" class="btn btn-primary btn-sm ml-2">
+            Download Receipt
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <h3 class="mt-5">Past Bookings</h3>
+  <% if (pastBookings.length === 0) { %>
+    <p>No past bookings.</p>
+  <% } else { %>
+    <div class="list-group">
+      <% pastBookings.forEach(booking => { %>
+        <div class="list-group-item">
+          <h5><%= booking.listing.title %></h5>
+          <p>
+            Check-in: <%= booking.checkin.toDateString() %><br>
+            Check-out: <%= booking.checkout.toDateString() %><br>
+            Adults: <%= booking.adults %>, Children: <%= booking.children %><br>
+            Sustainability Project: <%= booking.participateInSustainability ? "Yes" : "No" %>
+          </p>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+
+

@@ -1,0 +1,80 @@
+<% layout("layout/boilerplate") %>
+<div class="row">
+
+  <div class="col-8 offset-2">
+    <h1 class="mb-4 mt-4" >Book <%= listing.title %></h1>
+  
+    <form action="/listings/<%= listing._id %>/bookings" method="POST">
+  
+      <div class="mb-3">
+        <label for="adults" class="form-label">Number of Adults</label>
+        <input type="number" class="form-control form-control-sm" id="adults" name="booking[adults]" min="1" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="children" class="form-label">Number of Children</label>
+        <input type="number" class="form-control form-control-sm" id="children" name="booking[children]" min="0" required>
+      </div>
+  
+      <div class="mb-3">
+        <label for="days" class="form-label">Number of Days</label>
+        <input type="number" class="form-control form-control-sm" id="days" name="booking[days]" min="1" required>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="checkin" class="form-label">Check-in Date</label>
+          <input type="date" class="form-control form-control-sm" id="checkin" name="booking[checkin]" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="checkout" class="form-label">Check-out Date</label>
+          <input type="date" class="form-control form-control-sm" id="checkout" name="booking[checkout]" required>
+        </div>
+      </div>
+  
+  
+      <% if (listing. sustainabilityProject.name && listing. sustainabilityProject.description && listing. sustainabilityProject.startDate && listing. sustainabilityProject.endDate && listing. sustainabilityProject.startTime && listing. sustainabilityProject.endTime) { %>
+        <hr class="my-4">
+        <h5 class="mb-3">🌿 Sustainability Project</h5>
+      
+        <div class="mb-2"><strong>Project Name:</strong> <%= listing.sustainabilityProject.name %></div>
+      
+        <div class="mb-3">
+          <strong>Description:</strong>
+          <p><%= listing.sustainabilityProject.description %></p>
+        </div>
+      
+        <div class="row">
+          <p><strong>Start Date:</strong> 
+            <%= new Date(listing.sustainabilityProject.startDate).toLocaleDateString("en-IN", { day: 'numeric', month: 'long', year: 'numeric' }) %>
+          </p>
+          
+          <p><strong>End Date:</strong> 
+            <%= new Date(listing.sustainabilityProject.endDate).toLocaleDateString("en-IN", { day: 'numeric', month: 'long', year: 'numeric' }) %>
+          </p>
+        </div>
+      
+        <div class="row">
+          <p><strong>Start Time:</strong> 
+            <%= listing.sustainabilityProject.startTime %>
+          </p>
+          
+          <p><strong>End Time:</strong> 
+            <%= listing.sustainabilityProject.endTime %>
+          </p>
+        </div>
+      
+        <div class="mb-3">
+          <label class="form-label">Would you like to participate?</label>
+          <select class="form-select form-select-sm" name="booking[participate]" required>
+            <option value="yes">Yes</option>
+            <option value="no" selected>No</option>
+          </select>
+        </div>
+      <% } %>
+      
+      <button type="submit" class="btn btn-dark  add-btn mb-5">Confirm Booking</button>
+    </form>
+  </div>
+  
+</div>
